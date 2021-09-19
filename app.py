@@ -22,4 +22,4 @@ def neworder():
     # log_string = "New order submitted, content: {content}".format(content = json.dumps(order))
     # app.logger.info(log_string)
     return 'hello flask'
-app.run(host='0.0.0.0', port=80)
+app.run(host='0.0.0.0')
