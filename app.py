@@ -18,5 +18,5 @@ CORS(app)
 @app.route('/process', methods=['POST', 'GET'])
 def neworder():
     app.logger.info('container called')
-    return '\n'.join([f'{k}: {v}' for k, v in sorted(os.environ.items())]) 
+    return f"hello from python flask! container id: {os.getenv('POD_NAME')} at internal ip {os.getenv('POD_IP')}"
 app.run(host='0.0.0.0')
