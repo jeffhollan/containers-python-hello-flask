@@ -17,9 +17,6 @@ CORS(app)
 
 @app.route('/process', methods=['POST', 'GET'])
 def neworder():
-    # order = request.json
-   # response = requests.post(orders_url, json=order, timeout=60)
-    # log_string = "New order submitted, content: {content}".format(content = json.dumps(order))
-    # app.logger.info(log_string)
-    return 'hello flask'
+    app.logger.info('container called')
+    return '\n'.join([f'{k}: {v}' for k, v in sorted(os.environ.items())]) 
 app.run(host='0.0.0.0')
