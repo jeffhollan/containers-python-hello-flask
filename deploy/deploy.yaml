@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: python-app
+        image: ghcr.io/jeffhollan/python-rest-api:v0.3.1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 5000
+          name: flask
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-app
+spec:
+  ports:
+  - port: 80
+    targetPort: 5000
+  type: LoadBalancer
+  selector:
+    app: python-app
